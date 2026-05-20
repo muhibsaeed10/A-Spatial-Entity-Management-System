@@ -18,29 +18,21 @@ In GIS pipelines, raw geographic data must be structured cleanly before analysis
 
 The architecture mirrors professional GIS entity frameworks, strictly following the academic requirements of CPS209:
 
-┌────────────────────────────────────────────────────────┐
-│                      MapFeature                        │◄─── (Superclass)
-├────────────────────────────────────────────────────────┤
-│ - name: String                                         │
-│ - latitude: double                                     │
-│ - longitude: double                                    │
-├────────────────────────────────────────────────────────┤
-│ + MapFeature(name) [Overloaded]                        │
-│ + MapFeature(name, lat, lon)                           │
-│ + compareTo(other): int (Alphabetical sorting)         │
-│ + equals(obj): boolean (Spatial collision checking)    │
-└────────────────────────────▲───────────────────────────┘
-│
-│ (extends / "kind-of")
-┌──────────────┴──────────────┐
-│            Park             │◄─── (Subclass)
-├─────────────────────────────┤
-│ - acreage: double           │
-│ - isProtected: boolean      │
-├─────────────────────────────┤
-│ + isMajorConservationArea() │
-│ + getGisReport(): String    │
-└─────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                    MapFeature                       │◄─── (Superclass)
+├─────────────────────────────────────────────────────┤
+│ - name: String                                      │
+│ - latitude: double                                  │
+│ - longitude: double                                 │
+└──────────────────────────▲──────────────────────────┘
+                           │
+                           │ (extends / "kind-of")
+            ┌──────────────┴──────────────┐
+            │            Park             │◄─── (Subclass)
+            ├─────────────────────────────┤
+            │ - acreage: double           │
+            │ - isProtected: boolean      │
+            └─────────────────────────────┘
 
 ### Class Roles & Specifications
 
