@@ -89,3 +89,32 @@ Ensure your local terminal path has access to the standard Java Development Kit 
 ```bash
 java -version
 javac -version
+```
+
+### Step 2: Compile Files
+Compile all project workspace source sheets concurrently inside your destination workspace folder:
+```bash
+javac MapFeature.java Park.java ProjectOneTester.java
+```
+
+### Step 3: Run the Driver
+Execute the compiled test suite runner entry point:
+```bash
+java ProjectOneTester
+```
+
+### Expected Output
+When execution successfully starts up, the test driver will output organized spatial summaries reflecting data arrays before sorting, after collection sorting, and through deep conditional filtering:
+```text
+--- Unsorted GIS Data ---
+Town Hall (Lat: 43.6532, Lon: -79.3832)
+High Park (Lat: 43.6465, Lon: -79.4637)
+Algonquin (Lat: 45.5539, Lon: -78.4750)
+
+--- Alphabetically Sorted GIS Data ---
+Algonquin
+High Park
+Town Hall
+
+--- Conservation Analysis ---
+Algonquin is a Major Conservation Area.
