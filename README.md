@@ -16,40 +16,30 @@ In GIS pipelines, raw geographic data must be structured cleanly before analysis
 
 ## 🛠️ System Architecture & OOP Breakdown
 
-The architecture mirrors professional GIS entity frameworks, strictly following the academic requirements of CPS209:
+The architecture mirrors professional GIS entity frameworks, structured strictly to fulfill the requirements of CPS209:
 
-┌─────────────────────────────────────────────────────┐
-│                    MapFeature                       │◄─── (Superclass)
-├─────────────────────────────────────────────────────┤
-│ - name: String                                      │
-│ - latitude: double                                  │
-│ - longitude: double                                 │
-└──────────────────────────▲──────────────────────────┘
-                           │
-                           │ (extends / "kind-of")
-            ┌──────────────┴──────────────┐
-            │            Park             │◄─── (Subclass)
-            ├─────────────────────────────┤
-            │ - acreage: double           │
-            │ - isProtected: boolean      │
-            └─────────────────────────────┘
+| Class / Component | Type | Attributes & State Variables | Implemented Methods & Behaviors |
+| :--- | :--- | :--- | :--- |
+| **`MapFeature`** | `Superclass` | <ul><li>`String name`</li><li>`double latitude`</li><li>`double longitude`</li></ul> | <ul><li>`MapFeature(name)` *(Overloaded)*</li><li>`MapFeature(name, lat, lon)`</li><li>`compareTo(other)` *(Alphabetical Sorting)*</li><li>`equals(obj)` *(Spatial Collision Check)*</li><li>`toString()` *(Coordinate Telemetry)*</li></ul> |
+| **`Park`** | `Subclass` <br>*(Inherits from MapFeature)* | <ul><li>`double acreage`</li><li>`boolean isProtected`</li></ul> | <ul><li>`Park(name, lat, lon, acre, protected)`</li><li>`isMajorConservationArea()`</li><li>`getGisReport()`</li></ul> |
+| **`ProjectOneTester`** | `Driver Class` | <ul><li>*None (Execution Environment)*</li></ul> | <ul><li>`main(String[] args)`</li><li>Tracks dataset using `ArrayList<MapFeature>`</li></ul> |
 
 ### Class Roles & Specifications
 
-1. **`MapFeature` (Superclass)**
+1. **MapFeature (Superclass)**
    * **Purpose:** The base spatial record representing any single localized point or vector landmark.
-   * **Encapsulation:** Protects positional states (`latitude`, `longitude`, `name`) behind explicit private access modifiers paired with public accessors/mutators.
+   * **Encapsulation:** Protects positional states (latitude, longitude, name) behind explicit private access modifiers paired with public accessors/mutators.
    * **Polymorphic Behaviors:** * Overloads its constructors to seamlessly ingest minimal text identifiers or fully formed geometric coordinates.
      * Overrides `.toString()` to compile structural coordinate outputs formatted for immediate terminal logs.
      * Overrides `.equals()` to perform point-collision verification (checking if two features inhabit matching geometric coordinates).
      * Implements `Comparable<MapFeature>` to enable native alphanumeric indexing.
 
-2. **`Park` (Subclass)**
+2. **Park (Subclass)**
    * **Purpose:** Represents specialized environmental properties requiring complex metadata tracking.
-   * **Inheritance:** Explicitly models a `"kind-of"` hierarchical relationship with `MapFeature`.
+   * **Inheritance:** Explicitly models a "kind-of" hierarchical relationship with `MapFeature`.
    * **Domain Logic:** Introduces conditional evaluation engines (`isMajorConservationArea()`) and localized text compiling functions (`getGisReport()`).
 
-3. **`ProjectOneTester` (Driver Class)**
+3. **ProjectOneTester (Driver Class)**
    * **Purpose:** Houses the standalone `main()` method acting as an automated test harness.
    * **Collection Lifecycle:** Initializes an active `ArrayList<MapFeature>` buffer, tests heterogeneous data casting, orchestrates automated collection sort queries, and evaluates sub-typed geometric conditions.
 
@@ -76,11 +66,10 @@ The architecture mirrors professional GIS entity frameworks, strictly following 
 
 This solution runs on standard Java environments and is deliberately kept decoupled from third-party package namespaces to facilitate quick grading and zero classpath configuration mismatches across grading terminals.
 
-### Step 1: Verify Environment
-Ensure your local terminal path has access to the standard Java Development Kit compiler:
+### Step 1: Compile Files
+Compile all project workspace source sheets concurrently inside your destination workspace folder:
 ```bash
-java -version
-javac -version
+javac MapFeature.java Park.java ProjectOneTester.java
 ```
 
 ### Step 2: Compile Files
